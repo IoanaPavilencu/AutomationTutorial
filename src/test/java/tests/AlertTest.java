@@ -72,6 +72,7 @@ public class AlertTest {
        // alertOk.accept();
 
         //interactionam cu a 3 a alerta
+        pageMethods.scrollPage(0,150);
         WebElement alertConfirmButton = driver.findElement(By.id("confirmButton"));
         //alertConfirmButton.click();
         elementMethods.clickElement(alertConfirmButton);
@@ -99,7 +100,7 @@ public class AlertTest {
 
         //interactionam cu o alerta pentru care trebuie sa asteptam putin
         WebElement alertWait = driver.findElement(By.id("timerAlertButton"));
-        //alertWait.click();
+        alertWait.click();
         elementMethods.clickElement(alertWait);
 
 

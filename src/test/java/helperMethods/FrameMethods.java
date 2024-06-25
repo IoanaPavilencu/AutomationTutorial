@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 public class FrameMethods {
 
-    public static WebDriver driver;
+    public WebDriver driver;
 
     public FrameMethods(WebDriver driver) {
         this.driver = driver;
