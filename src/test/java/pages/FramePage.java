@@ -21,6 +21,7 @@ public class FramePage {
         elementMethods =new ElementMethods(driver);
         pageMethods = new PageMethods(driver);
         frameMethods = new FrameMethods(driver);
+
         PageFactory.initElements(driver,this);
 
     }

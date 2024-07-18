@@ -2,6 +2,7 @@ package pages;
 
 import helperMethods.ElementMethods;
 import helperMethods.PageMethods;
+import helperMethods.WindowMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +12,7 @@ public class AlertsWindowsPage {
     public WebDriver driver;
     public ElementMethods elementMethods;
     public PageMethods pageMethods;
+    public WindowMethods windowMethods;
 
     //Constructor
     public AlertsWindowsPage(WebDriver driver) {
@@ -20,11 +22,15 @@ public class AlertsWindowsPage {
         PageFactory.initElements(driver,this);
 
     }
+
     @FindBy(xpath = "//span[text()='Browser Windows']")
     public WebElement browserWindows;
 
     @FindBy(xpath = "//span[text()='Frames']")
     public WebElement frameButton;
+
+    @FindBy(xpath = "//span[text()='Alerts']")
+    public WebElement alertsForm;
 
     public void navigateToWindowPage(){
         pageMethods.scrollPage(0,100);
@@ -34,5 +40,9 @@ public class AlertsWindowsPage {
     public void navigateToFramePage() {
         pageMethods.scrollPage(0,100);
         elementMethods.clickElement(frameButton);
+    }
+
+    public void navigateToAlertsForm(){
+        elementMethods.clickElement(alertsForm);
     }
 }
