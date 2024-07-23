@@ -1,42 +1,30 @@
 package tests;
 
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import pages.FormsPage;
 import pages.HomePage;
 import pages.PracticeFormPage;
+import sharedData.SharedData;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PracticeFormTest {
+public class PracticeFormTest extends SharedData {
 
-    public WebDriver driver;
+
 
     @Test
     public void metodaTest() {
+        prepareEnvironment();
 
-        //deschidem un browser
-
-        driver = new ChromeDriver();
-
-        //accesam un anumit URL
-
-        driver.get("https://demoqa.com");
-
-        //facem browser-ul in mod maximize
-
-        driver.manage().window().maximize();
-
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         homePage.navigateToFormsMenu();
 
-        FormsPage formsPage =new FormsPage(driver);
+        FormsPage formsPage =new FormsPage(getDriver());
         formsPage.navigateToPracticeForm();
 
-        PracticeFormPage practiceFormPage= new PracticeFormPage(driver);
+        PracticeFormPage practiceFormPage= new PracticeFormPage(getDriver());
 
         String firstNameValue ="Ioana";
         String lastNameValue="Pavilencu";

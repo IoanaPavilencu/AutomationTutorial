@@ -1,47 +1,23 @@
 package tests;
 
-import helperMethods.AlertMethods;
-import helperMethods.ElementMethods;
-import helperMethods.PageMethods;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import pages.AlertPage;
 import pages.AlertsWindowsPage;
 import pages.HomePage;
+import sharedData.SharedData;
 
-import java.time.Duration;
-
-public class AlertTest {
-
-    public WebDriver driver;
+public class AlertTest extends SharedData {
 
     @Test
     public void metodaTest() {
 
-        //deschidem un browser
-        driver = new ChromeDriver();
-
-        //accesam un anumit URL
-        driver.get("https://demoqa.com");
-
-        //facem browser-ul in mod maximize
-        driver.manage().window().maximize();
-
-        //Wait implicit
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        //interactionam cu meniul/submeniul de pe site
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         homePage.navigateToAlertsMenu();
 
-        AlertsWindowsPage alertsWindowsPage = new AlertsWindowsPage(driver);
+        AlertsWindowsPage alertsWindowsPage = new AlertsWindowsPage(getDriver());
         alertsWindowsPage.navigateToAlertsForm();
 
-        AlertPage alertPage = new AlertPage(driver);
+        AlertPage alertPage = new AlertPage(getDriver());
         alertPage.interactAlertOK();
         alertPage.interactWithConfirmationButton();
         alertPage.interactWithPromtButton("Buton OK");
