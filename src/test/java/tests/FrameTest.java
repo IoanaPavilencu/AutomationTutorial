@@ -16,11 +16,6 @@ public class FrameTest extends SharedData {
     @Test
     public void metodaTest(){
 
-        AlertMethods alertMethods = new AlertMethods(getDriver());
-        ElementMethods elementMethods = new ElementMethods(getDriver());
-        PageMethods pageMethods = new PageMethods(getDriver());
-        FrameMethods frameMethods = new FrameMethods(getDriver());
-
         HomePage homePage =new HomePage(getDriver());
         homePage.navigateToAlertsMenu();
 
