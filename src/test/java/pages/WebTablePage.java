@@ -1,5 +1,6 @@
 package pages;
 
+import objectData.WebTableObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,24 +37,23 @@ public class WebTablePage extends BasePage {
     @FindBy(id = "delete-record-4")
     private WebElement deleteElement;
 
-    public void addEntry(String firstNameValue, String lastNameValue, String emailValue,
-                         String ageValue, String salaryValue, String departmentValue){
+    public void addEntry(WebTableObject testData){
         elementMethods.clickElement(addElement);
-        elementMethods.fillElement(firstNameElement,firstNameValue);
-        elementMethods.fillElement(lastNameElement,lastNameValue);
-        elementMethods.fillElement(emailElement,emailValue);
-        elementMethods.fillElement(ageElement,ageValue);
-        elementMethods.fillElement(salaryElement,salaryValue);
-        elementMethods.fillElement(departmentElement,departmentValue);
+        elementMethods.fillElement(firstNameElement, testData.getFirstNameValue());
+        elementMethods.fillElement(lastNameElement, testData.getLastNameValue());
+        elementMethods.fillElement(emailElement, testData.getEmailValue());
+        elementMethods.fillElement(ageElement, testData.getAgeValue());
+        elementMethods.fillElement(salaryElement, testData.getSalaryValue());
+        elementMethods.fillElement(departmentElement, testData.getDepartmentValue());
         elementMethods.clickElement(submitElement);
 
     }
 
-    public void editEntry(String editsalaryValue,String editdepartmentValue){
+    public void editEntry(WebTableObject testData){
         elementMethods.clickElement(editElement);
-        elementMethods.clearFillElement(editsalaryElement,editsalaryValue);
+        elementMethods.clearFillElement(editsalaryElement, testData.getEditsalaryValue());
         editdepartmentElement.clear();
-        elementMethods.fillElement(editdepartmentElement,editdepartmentValue);
+        elementMethods.fillElement(editdepartmentElement, testData.getEditdepartmentValue());
         elementMethods.clickElement(editsubmitElement);
 
     }

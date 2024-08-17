@@ -1,0 +1,14 @@
+{
+  "firstNameValue" :"Ioana",
+  "lastNameValue":"Pavilencu",
+  "emailValue":"ioana@yahoo.com",
+  "genderValue":"Female",
+  "mobilenumberValue":"0724743866",
+  "dateOfBirthDaysValue":"23",
+  "subjectsInputValue":"Arts",
+  "hobbiesValue": ["Sports", "Music"],
+  "picturePathValue":"poza.jpg",
+  "addressValue":"adresa mea este: str.Principala, nr.77C",
+  "stateInputValue":"Uttar Pradesh",
+  "cityInputValue": "Agra"
+}

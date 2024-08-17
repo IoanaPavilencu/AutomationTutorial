@@ -1,5 +1,6 @@
 package pages;
 
+import objectData.PracticeFormObject;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -71,18 +72,16 @@ public class PracticeFormPage extends BasePage {
     @FindBy(xpath = "//table[@class='table table-dark table-striped table-bordered table-hover']/tbody/tr")
     private List<WebElement> tableValues;
 
-    public void fillEntireForm(String firstNameValue, String lastNameValue, String emailValue, String genderValue, String mobilenumberValue,
-                               String dateOfBirthDaysValue, String subjectsInputValue, List<String> hobbiesValue, String picturePathValue, String addressValue, String stateInputValue,
-                               String cityInputValue){
+    public void fillEntireForm(PracticeFormObject testData){
         pageMethods.scrollPage(0,350);
 
-        elementMethods.fillElement(firstName, firstNameValue);
-        elementMethods.fillElement(lastName, lastNameValue);
-        elementMethods.fillElement(userEmail, emailValue);
+        elementMethods.fillElement(firstName, testData.getFirstNameValue());
+        elementMethods.fillElement(lastName, testData.getLastNameValue());
+        elementMethods.fillElement(userEmail, testData.getEmailValue());
         pageMethods.scrollPage(0,350);
 
 
-        switch (genderValue){
+        switch (testData.getGenderValue()){
             case "Male":
                 //genderElements.get(0).click();
                 elementMethods.clickElement(genderElements.get(0));
@@ -97,65 +96,61 @@ public class PracticeFormPage extends BasePage {
                 break;
         }
 
-        elementMethods.fillElement(userNumber, mobilenumberValue);
+        elementMethods.fillElement(userNumber, testData.getMobilenumberValue());
         elementMethods.clickElement(dateOfBirth);
         elementMethods.selectByTextElement(dateOfBirthMonth, "September");
         elementMethods.selectByValue(year, "2099");
 
 
         for (Integer index = 0; index < dateOfBirthDays.size(); index++) {
-            if (dateOfBirthDays.get(index).getText().equals(dateOfBirthDaysValue)) {
+            if (dateOfBirthDays.get(index).getText().equals(testData.getDateOfBirthDaysValue())) {
                 //dateOfBirthDays.get(index).click();
                 elementMethods.clickElement(dateOfBirthDays.get(index));
                 break;
             }
         }
 
-        elementMethods.fillElement(subjectsInput, subjectsInputValue);
+        elementMethods.fillElement(subjectsInput, testData.getSubjectsInputValue());
         elementMethods.pressElement(subjectsInput, Keys.ENTER);
 
         for (Integer index = 0; index < hobbiesElements.size(); index++){
             String hobbyText = hobbiesElements.get(index).getText();
-            if (hobbiesValue.contains(hobbyText)) {
+            if (testData.getGenderValue().contains(hobbyText)) {
                 elementMethods.clickJSElement(hobbiesElements.get(index));
             }
         }
 
-        File file =new File("src/test/resources/" + picturePathValue);
+        File file =new File("src/test/resources/" + testData.getPicturePathValue());
         uploadPictureElement.sendKeys(file.getAbsolutePath());
 
-        elementMethods.fillElement(currentAddress, addressValue);
+        elementMethods.fillElement(currentAddress, testData.getAddressValue());
 
         pageMethods.scrollPage(0,350);
         elementMethods.clickElement(state);
 
-        elementMethods.fillElement(stateElement,stateInputValue);
+        elementMethods.fillElement(stateElement,testData.getStateInputValue());
         elementMethods.pressElement(stateElement, Keys.ENTER);
 
-        elementMethods.fillElement(city, cityInputValue);
+        elementMethods.fillElement(city, testData.getCityInputValue());
         elementMethods.pressElement(city, Keys.ENTER);
         pageMethods.scrollPage(0,350);
         elementMethods.clickJSElement(submit);
 
         }
 
-        public void validateEntireForm(String firstNameValue, String lastNameValue,
-                                       String emailValue,String genderValue,String mobilenumberValue,
-                                       String subjectsInputValue, List<String> hobbiesValues,
-                                       String picturePathValue, String addressValue,
-                                       String stateInputValue, String cityInputValue) {
+        public void validateEntireForm(PracticeFormObject testData) {
 
             Assert.assertEquals(thankYouMessage.getText(),"Thanks for submitting the form");
-            Assert.assertEquals(tableValues.get(0).getText(),"Student Name " + firstNameValue + " " + lastNameValue);
-            Assert.assertEquals(tableValues.get(1).getText(), "Student Email " + emailValue);
-            Assert.assertEquals(tableValues.get(2).getText(),"Gender " + genderValue);
-            Assert.assertEquals(tableValues.get(3).getText(),"Mobile " + mobilenumberValue);
-            Assert.assertEquals(tableValues.get(5).getText(),"Subjects " + subjectsInputValue);
-            String expectedHobbiesText = "Hobbies " + String.join(", ", hobbiesValues);
+            Assert.assertEquals(tableValues.get(0).getText(),"Student Name " + testData.getFirstNameValue() + " " + testData.getLastNameValue());
+            Assert.assertEquals(tableValues.get(1).getText(), "Student Email " + testData.getEmailValue());
+            Assert.assertEquals(tableValues.get(2).getText(),"Gender " + testData.getGenderValue());
+            Assert.assertEquals(tableValues.get(3).getText(),"Mobile " + testData.getMobilenumberValue());
+            Assert.assertEquals(tableValues.get(5).getText(),"Subjects " + testData.getSubjectsInputValue());
+            String expectedHobbiesText = "Hobbies " + String.join(", ", testData.getHobbiesValue());
             Assert.assertEquals(tableValues.get(6).getText(), expectedHobbiesText);
-            Assert.assertEquals(tableValues.get(7).getText(), "Picture " + picturePathValue);
-            Assert.assertEquals(tableValues.get(8).getText(),"Address " + addressValue);
-            Assert.assertEquals(tableValues.get(9).getText(),"State and City " + stateInputValue + " " + cityInputValue);
+            Assert.assertEquals(tableValues.get(7).getText(), "Picture " + testData.getPicturePathValue());
+            Assert.assertEquals(tableValues.get(8).getText(),"Address " + testData.getAddressValue());
+            Assert.assertEquals(tableValues.get(9).getText(),"State and City " + testData.getStateInputValue() + " " + testData.getCityInputValue());
 
         }
  }
