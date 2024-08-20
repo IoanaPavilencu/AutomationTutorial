@@ -7,7 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-
 public class PracticeFormObject extends GeneralObject {
     private String firstNameValue;
     private String lastNameValue;
