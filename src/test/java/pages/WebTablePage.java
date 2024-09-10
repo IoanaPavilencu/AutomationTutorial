@@ -54,7 +54,7 @@ public class WebTablePage extends BasePage {
         elementMethods.fillElement(departmentElement,testData.getDepartmentValue());
         LoggerUtility.info("The user fills department element with the value: " +testData.getDepartmentValue());
         elementMethods.clickElement(submitElement);
-        LoggerUtility.info("The user clicke to submit the form. " + submitElement);
+        LoggerUtility.info("The user clicked to submit the form. " + submitElement);
 
 
     }

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ElementsPage extends BasePage{
+
     public ElementsPage(WebDriver driver) {
         super(driver);
     }
