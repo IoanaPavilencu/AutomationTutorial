@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import java.time.Duration;
 
 @Getter
@@ -18,9 +17,15 @@ public class SharedData {
 
     @BeforeMethod
     public void prepareEnvironment(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
-        driver = new ChromeDriver(options);
+        boolean ci_cd = Boolean.parseBoolean(System.getProperty("CI_CD"));
+        if (ci_cd){
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless=new");
+            driver = new ChromeDriver(options);
+        } else {
+            driver = new ChromeDriver();
+        }
+
         driver.get("https://demoqa.com");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
